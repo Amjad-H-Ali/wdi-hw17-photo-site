@@ -4,7 +4,11 @@ const app = express();
 //Port we will use
 const PORT = 3000;
 
+
 //Connect/Require the Database
+require('./db/db');
+
+
 
 
 
