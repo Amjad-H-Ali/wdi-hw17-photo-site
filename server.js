@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 //Require middleware for PUT and DELETE Routes
 const methodOverride = require('method-override');
 //Require controllers
-const userControlller = require('./controllers/userControlller');
+const userControlller = require('./controllers/userController');
  //Connect/Require the Database file
 require('./db/db');
 //Use Middlewares

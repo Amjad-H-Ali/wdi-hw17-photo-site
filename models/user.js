@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	userNAme:{
+	userName:{
 		type: String,
 		required: true,
 		unique: true
@@ -16,9 +16,9 @@ const userSchema = new mongoose.Schema({
 		required: true,
 		unique: true
 	},
-	age:{
-		type: Number,
-		required: false
+	bday:{
+		type: Date,
+		required: true
 	},
 	gender:{
 		type: String,

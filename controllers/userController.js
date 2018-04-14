@@ -3,10 +3,13 @@ const express = require('express');
 //We need to use the router from express
 const router = express.Router();
 //We need to require the models file in order to use the schema
-const user = require('../models/user.js');
+const User = require('../models/user.js');
 
 
-
+//Add User Page
+router.get('/', (req, res)=>{
+	res.render('user/new.ejs');
+})
 
 
 
