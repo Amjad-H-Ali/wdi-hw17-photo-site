@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Photo Drop</title>
+</head>
+<body>
+	<h1>Meet The Talented Photographers!</h1>
+
+	<br>
+	<ul>
+		<% for(let i = 0, len = user.length; i < len; i ++){%>
+			<li>
+				<a href="/user/<%=user[i].id%>"><%=user[i].name%></a>
+			</li>
+		<%}%>	
+	</ul>
+</body>
+</html>

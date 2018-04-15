@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Photo-App</title>
+</head>
+<body>
+	<input type="image" name="" src="<%=user.profilePicture%>" height='200' width='200' id= 'profilePic'>
+	<form action='/user/<%=user.id%>' method='POST' >
+		<input type="text" name="name" value='' >
+		<input type="submit" name="button">
+	</form>
+
+</body>
+</html>
