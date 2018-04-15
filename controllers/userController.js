@@ -38,16 +38,7 @@ router.get('/', (req, res)=>{
 
 
 
-//deleteRoute for photos
-router.delete('/:id/:photoId', (req, res)=>{
-	console.log('-----------------------------------------------DELETE------------------');
-	User.findByIdAndUpdate(req.params.id, {$pull:{photo:req.params.photoId}} , (err, foundUser)=>{
-		if(err)console.log(err);
 
-		res.redirect('/user')
-		
-	})
-})
 
 
 
@@ -82,7 +73,7 @@ router.post('/:id/pic',(req, res)=>{
 })
 
 
-//Route to change Rofile picture
+//Route to change profile picture
 router.post('/:id', (req, res)=>{
 	console.log('We hit this route------------------------------------------------------');
 	 
@@ -97,6 +88,40 @@ router.post('/:id', (req, res)=>{
 });
 
 
+//Delete Route for photos
+router.delete('/:id/:photoId', (req, res)=>{
+	console.log('-----------------------------------------------DELETE------------------');
+	User.findByIdAndUpdate(req.params.id, {$pull:{photo:req.params.photoId}} , (err, foundUser)=>{
+		if(err)console.log(err);
+
+		res.redirect('/user')
+		
+	});
+});
+
+
+//Route to edit page
+
+router.get('/:id/edit',(req, res)=>{
+	User.findById(req.params.id, (err, foundUser)=>{
+		if(err)console.log(err);
+
+		res.render('user/edit.ejs',{
+			user: foundUser
+		})
+	})
+})
+
+//Route to edit User Data
+router.put('/:id',(req, res)=>{
+
+
+	User.findByIdAndUpdate(req.params.id, req.body, (err, updatedUser)=>{
+		if(err)console.log(err);
+
+		res.redirect(`/user/${updatedUser.id}`)
+	})
+})
 
 
 
