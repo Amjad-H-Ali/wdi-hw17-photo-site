@@ -20,7 +20,7 @@
 	<%for(let i = 0, len = user.photo.length; i < len; i ++){%>
 	<img src="<%=user.photo[i]%>" heigth='100' width='100'>
 	<br>
-	<form action='/user/<%=user.id%>/<%=user.photo[i]%>?_method=delete' method='POST'>
+	<form action='/user/<%=user.id%>/<%=user.photo[i]%>?_method=DELETE' method='POST'>
 		<input type="Submit" name="delete" value='Delete'>
 	</form>
 	<%}%>

@@ -6,6 +6,8 @@ const router = express.Router();
 const User = require('../models/user.js');
 
 
+
+
 //Add Page for User (Sign Up Page)
 router.get('/new', (req, res)=>{
 	res.render('user/new.ejs');
@@ -20,7 +22,7 @@ router.post('/', (req, res)=>{
 			console.log(err);
 		}else{
 			console.log(createdUser);
-			res.redirect('/user')
+			res.redirect('/user');
 		}
 
 	});
@@ -31,9 +33,9 @@ router.get('/', (req, res)=>{
 	User.find((err, user)=>{
 		res.render('user/index.ejs', {
 			user: user
-		})
-	})
-})
+		});
+	});
+});
 
 
 
@@ -46,20 +48,41 @@ router.get('/', (req, res)=>{
 //Route to Show Page
 router.get('/:id', (req, res)=>{
 
-	const date = Date.now();
-
 	console.log('------------------------------------------------');
 	User.findById(req.params.id, (err, foundUser)=>{
 		res.render('user/show.ejs', {
 			user: foundUser
 
-		})
-	})
-})
+		});
+	});
+});
+
+
+
+
+//Delete Route for photos
+router.delete('/:id/:photoId', (req, res)=>{
+	console.log('Delete');
+	console.log('-----------------------------------------------DELETE------------------');
+	User.findByIdAndUpdate(req.params.id, {$pull:{photo:req.params.photoId}} , (err, foundUser)=>{
+		if(err)console.log(err);
+
+		res.redirect('/user');
+		
+	});
+});
+
+
+
+
+
+
+
+
 
 //route to add photos for user
 router.post('/:id/pic',(req, res)=>{
-	const today = Date.now();
+	
 
 	console.log('We hit route pic -------------------------------------------------------------------------------------');
 	User.findByIdAndUpdate(req.params.id, {$push:{photo:req.body.photo}}, (err, updatedUser)=>{
@@ -67,10 +90,12 @@ router.post('/:id/pic',(req, res)=>{
 			console.log(err);
 		}
 		else{
-			res.redirect(`/user/${updatedUser.id}`)
+			res.redirect(`/user/${updatedUser.id}`);
 		}
-	})
-})
+	});
+});
+
+
 
 
 //Route to change profile picture
@@ -82,22 +107,11 @@ router.post('/:id', (req, res)=>{
 			console.log(err);
 		}
 		else{
-			res.redirect(`/user/${updatedUser.id}`)
+			res.redirect(`/user/${updatedUser.id}`);
 		}
-	})
-});
-
-
-//Delete Route for photos
-router.delete('/:id/:photoId', (req, res)=>{
-	console.log('-----------------------------------------------DELETE------------------');
-	User.findByIdAndUpdate(req.params.id, {$pull:{photo:req.params.photoId}} , (err, foundUser)=>{
-		if(err)console.log(err);
-
-		res.redirect('/user')
-		
 	});
 });
+
 
 
 //Route to edit page
@@ -108,9 +122,11 @@ router.get('/:id/edit',(req, res)=>{
 
 		res.render('user/edit.ejs',{
 			user: foundUser
-		})
-	})
-})
+		});
+	});
+});
+
+
 
 //Route to edit User Data
 router.put('/:id',(req, res)=>{
@@ -119,9 +135,9 @@ router.put('/:id',(req, res)=>{
 	User.findByIdAndUpdate(req.params.id, req.body, (err, updatedUser)=>{
 		if(err)console.log(err);
 
-		res.redirect(`/user/${updatedUser.id}`)
-	})
-})
+		res.redirect(`/user/${updatedUser.id}`);
+	});
+});
 
 
 
