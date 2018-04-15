@@ -35,6 +35,23 @@ router.get('/', (req, res)=>{
 	})
 })
 
+
+
+
+//deleteRoute for photos
+router.delete('/:id/:photoId', (req, res)=>{
+	console.log('-----------------------------------------------DELETE------------------');
+	User.findByIdAndUpdate(req.params.id, {$pull:{photo:req.params.photoId}} , (err, foundUser)=>{
+		if(err)console.log(err);
+
+		res.redirect('/user')
+		
+	})
+})
+
+
+
+
 //Route to Show Page
 router.get('/:id', (req, res)=>{
 
@@ -46,6 +63,21 @@ router.get('/:id', (req, res)=>{
 			user: foundUser
 
 		})
+	})
+})
+
+//route to add photos for user
+router.post('/:id/pic',(req, res)=>{
+	const today = Date.now();
+
+	console.log('We hit route pic -------------------------------------------------------------------------------------');
+	User.findByIdAndUpdate(req.params.id, {$push:{photo:req.body.photo}}, (err, updatedUser)=>{
+		if(err){
+			console.log(err);
+		}
+		else{
+			res.redirect(`/user/${updatedUser.id}`)
+		}
 	})
 })
 
@@ -63,7 +95,6 @@ router.post('/:id', (req, res)=>{
 		}
 	})
 });
-
 
 
 
