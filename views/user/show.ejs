@@ -4,11 +4,23 @@
 	<title>Photo-App</title>
 </head>
 <body>
-	<input type="image" name="" src="<%=user.profilePicture%>" height='200' width='200' id= 'profilePic'>
+	<img  src="<%=user.profilePicture%>" height='200' width='200' >
 	<form action='/user/<%=user.id%>' method='POST' >
-		<input type="text" name="name" value='' >
+		<input type="text" name="profilePicture" placeholder="Update Profile Picture" >
 		<input type="submit" name="button">
 	</form>
+	<br>
+	<h1><%=user.name%></h1>
+	<br>
+	<form action='/user/<%=user.id%>/pic' method='POST'>
+		<input type="text" name="photo" placeholder="Add Photos here!">
+		<input type="Submit" name="button" value="Post">
+		<br>
+	</form>
+	<%for(let i = 0, len = user.photo.length; i < len; i ++){%>
+	<img src="<%=user.photo[i]%>" heigth='100' width='100'>
+	<br>
+	<%}%>
 
 </body>
 </html>

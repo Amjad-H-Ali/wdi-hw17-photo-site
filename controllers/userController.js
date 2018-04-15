@@ -37,6 +37,10 @@ router.get('/', (req, res)=>{
 
 //Route to Show Page
 router.get('/:id', (req, res)=>{
+
+	const date = Date.now();
+
+	console.log('------------------------------------------------');
 	User.findById(req.params.id, (err, foundUser)=>{
 		res.render('user/show.ejs', {
 			user: foundUser
@@ -46,19 +50,19 @@ router.get('/:id', (req, res)=>{
 })
 
 
+//Route to change Rofile picture
 router.post('/:id', (req, res)=>{
 	console.log('We hit this route------------------------------------------------------');
-	User.findById(req.params.id, (err, user)=>{
-
+	 
+	User.findByIdAndUpdate(req.params.id, {profilePicture: req.body.profilePicture}, (err, updatedUser)=>{
 		if(err){
 			console.log(err);
 		}
 		else{
-			user.name = req.body.profilePicture;
+			res.redirect(`/user/${updatedUser.id}`)
 		}
-		res.redirect('/user')
 	})
-})
+});
 
 
 
